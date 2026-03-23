@@ -1,0 +1,40 @@
+still not working right
+
+if you even refresh the page it should show 30 sec countdown
+
+stocksense_india (28).html
++5
+-2
+      loginAttemptsLeft=Math.max(0,loginAttemptsLeft-1);      document.getElementById('mpinInput').value='';      if(triesLeft<=0){        setStatus('✖ Wrong PIN — No attempts left. Refresh the page to try again.','var(--dn)');
+        setStatus('✖ Wrong PIN — No attempts left. Refresh the page to try again.','var(--dn)');        document.getElementById('connectBtn').disabled=true;      loginAttemptsLeft=Math.max(0,loginAttemptsLeft-1);      sessionStorage.setItem(SS_ATTEMPTS,String(loginAttemptsLeft));      document.getElementById('mpinInput').value='';      if(triesLeft<=0){
+stocksense_india (28).html
++10
+-2
+  el.textContent=msg;  const isErr=(color==='var(--dn)')||/Wrong PIN|No attempts|Server not running/i.test(msg);  el.classList.toggle('ls-status-err',isErr);  const resolved=isErr?'#fb7185':((color==='var(--mu)'||!color)?'#cbd5e1':color);
+  const isErr=(color==='var(--dn)')||/Wrong PIN|No attempts|Server not running/i.test(msg);  const resolved=isErr?'#fb7185':((color==='var(--mu)'||!color)?'#cbd5e1':color);  el.textContent=msg;  const isLock=color==='lock'||/^⏳ Locked out/i.test(msg);  const isErr=!isLock&&((color==='var(--dn)')||/Wrong PIN|No attempts|Server not running/i.test(msg));  el.classList.toggle('ls-status-err',isErr);
+Fixing variable order: loginAttemptsLeft must be declared before initLoginSplash() runs.
+
+stocksense_india (28).html
++1
+let lockoutInterval=null;
+let lockoutInterval=null;let loginAttemptsLeft=4;
+stocksense_india (28).html
+-1
+let audioCtx=null;let loginAttemptsLeft=4;function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+let loginAttemptsLeft=4;let audioCtx=null;function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+Here’s what was added:
+
+30s lockout + countdown (survives refresh)
+After 4 wrong PINs, a 30 second lock starts and is stored in sessionStorage.
+Refreshing the page still shows the countdown (e.g. ⏳ Locked out — 25s left…) until the 30s are over.
+PIN field and Connect are disabled during lockout.
+When the timer hits 0, attempts reset to 4 and you can enter the PIN again.
+File to open
+Use stocksense_india (29).html (latest copy with this behavior).
+
+Note: Lockout is per browser tab (sessionStorage). Closing the tab clears it; keeping the tab and refreshing keeps the timer.
+
+make its look more bold its not visible and make this also come in accurate data
+
+Get Cursor Pro for more Agent usage, unlimited Tab, and more.
+
